@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-.Sidebar a {
+.Sidebar a, .dropdown-item, .dropdown-item.active {
   color: #444;
 }
 
@@ -31,7 +31,7 @@
   color: #444;
 }
 
-.Sidebar .nav-item .active { /* NavLink adds active class to <a> when active */
+.Sidebar .nav-item .active, .dropdown-item.active { /* NavLink adds active class to <a> when active */
   background-color: #def;
 }
 
