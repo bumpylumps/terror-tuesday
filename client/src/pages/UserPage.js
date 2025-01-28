@@ -7,15 +7,30 @@ import Body from '../components/Body';
 import TimeAgo from '../components/TimeAgo';
 import { useApi } from '../contexts/ApiProvider';
 import Posts from '../components/Posts';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/UserProvider';
+import { useFlash } from '../contexts/FlashProvider';
+
+
 
 export default function UserPage() {
     const { username } = useParams();
     const[user, setUser] = useState();
     const api = useApi();
+    const [isFollower, setIsFollower] = useState();
+    const { user: loggedInUser } = useUser();
+    const flash = useFlash();
+    const navigate = useNavigate();
+
+
 
     useEffect(() => {
         (async ()=> {
             const response = await api.get('/users/' + username);
+            if(response.ok){
+                
+            }
             setUser(response.ok ? response.body : null);
         })();
     }, [username, api]);
