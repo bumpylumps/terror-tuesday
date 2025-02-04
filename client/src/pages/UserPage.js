@@ -29,11 +29,38 @@ export default function UserPage() {
         (async ()=> {
             const response = await api.get('/users/' + username);
             if(response.ok){
-                
+                setUser(response.body);
+                if (response.body.username !== loggedInUser.username) {
+                    const follower = await api.get(
+                        '/me/following' + response.body.id);
+                    if (follower.status === 204) {
+                        setIsFollower(true);
+                    }
+                    else if (follower.status === 404) {
+                        setIsFollower(false);
+                    }
+                }
+                else {
+                    setIsFollower(null);
+                }
             }
-            setUser(response.ok ? response.body : null);
+            else {
+                setUser(null);
+            }
         })();
-    }, [username, api]);
+    }, [username, api, loggedInUser]);
+
+    const edit = () => {
+        // TODO
+    }; 
+
+    const follow = async () => {
+        // TODO
+    };
+
+    const unfollow = async () => {
+        // TODO
+    };
 
     return (
         <Body sidebar>
