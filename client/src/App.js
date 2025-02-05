@@ -12,6 +12,7 @@ import FlashProvider from './contexts/FlashProvider';
 import UserProvider from  './contexts/UserProvider';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import ChangePasswordPage from './pages/ChangePasswordPage';
 
 
 
@@ -38,6 +39,7 @@ export default function App() {
                       <Route path="/user/:username" element={<UserPage />} />
                       <Route path="/register" element={<RegistrationPage />} />
                       <Route path="/edit" element={<EditUserPage />} />
+                      <Route path="/password" element={<ChangePasswordPage />} />
                       <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
                   </PrivateRoute>
