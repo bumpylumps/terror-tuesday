@@ -7,6 +7,7 @@ import ExplorePage from './pages/ExplorePage';
 import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import EditUserPage from './pages/EditUserPage';
 import FlashProvider from './contexts/FlashProvider';
 import UserProvider from  './contexts/UserProvider';
 import PrivateRoute from './components/PrivateRoute';
@@ -36,6 +37,7 @@ export default function App() {
                       <Route path="/explore" element={<ExplorePage />} />
                       <Route path="/user/:username" element={<UserPage />} />
                       <Route path="/register" element={<RegistrationPage />} />
+                      <Route path="/edit" element={<EditUserPage />} />
                       <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
                   </PrivateRoute>

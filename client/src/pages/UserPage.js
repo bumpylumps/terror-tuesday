@@ -32,7 +32,7 @@ export default function UserPage() {
                 setUser(response.body);
                 if (response.body.username !== loggedInUser.username) {
                     const follower = await api.get(
-                        '/me/following' + response.body.id);
+                        '/me/following/' + response.body.id);
                     if (follower.status === 204) {
                         setIsFollower(true);
                     }
@@ -51,15 +51,31 @@ export default function UserPage() {
     }, [username, api, loggedInUser]);
 
     const edit = () => {
-        // TODO
+        navigate('/edit');
     }; 
 
     const follow = async () => {
-        // TODO
+        const response = await api.post('/me/following/' + user.id);
+        if(response.ok) {
+            flash(
+                <>
+                    You are now following <b>{user.username}</b>.
+                </>, 'success'
+            );
+            setIsFollower(true);
+        }
     };
 
     const unfollow = async () => {
-        // TODO
+        const response = await api.delete('/me/following/' + user.id);
+        if(response.ok){
+            flash(
+                <>
+                    You have unfollowed <b>{user.username}</b>.
+                </>, 'success'
+            );
+            setIsFollower(false);
+        }
     };
 
     return (
@@ -69,7 +85,7 @@ export default function UserPage() {
             :
             <>
                 {user === null ?
-                    <p>Could not retrieve blog posts.</p>
+                    <p>User not found.</p>
                     :
                         <>
                             <Stack direction="horizontal" gap={4}>
@@ -82,6 +98,21 @@ export default function UserPage() {
                                 <br />
                                 Last seen: <TimeAgo isoDate={user.last_seen} />
                             </p>
+                            {isFollower === null &&
+                                <Button variant="primary" onClick={edit}>
+                                    Edit
+                                </Button>
+                            }
+                            {isFollower === false &&
+                                <Button variant="primary" onClick={follow}>
+                                    Follow
+                                </Button>
+                            }
+                            {isFollower === true &&
+                                <Button variant="primary" onClick={unfollow}>
+                                    Unfollow
+                                </Button>
+                            }
                         </div>
                     </Stack>
                     <Posts content={user.id} />
