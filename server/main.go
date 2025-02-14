@@ -74,6 +74,7 @@ func deleteMovie(w http.ResponseWriter, req *http.Request) {
 
 func main() {
 	http.HandleFunc("/hello", hello)
+	//get all movies
 	http.HandleFunc("/movies/all", getAll)
 	//add movies to list
 	http.HandleFunc("/movies/add", postMovie)
